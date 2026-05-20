@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RouteClaim – Reclama Tu Ruta</title>
+<link rel="stylesheet" href="styles.css"/>
+<!-- MapLibre GL JS 3D (open-source, sin token) -->
+<link href="https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ══════════════════════
+     LANDING PAGE
+══════════════════════ -->
+<div id="landing">
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Semicírculo sol -->
+        <path d="M5 28 A18 18 0 0 1 39 28" fill="none" stroke="#7a9968" stroke-width="1.2"/>
+        <!-- Rayos de sol -->
+        <line x1="22" y1="6"  x2="22" y2="9"  stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+        <line x1="32" y1="9"  x2="30" y2="11" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+        <line x1="38" y1="18" x2="35" y2="19" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+        <line x1="12" y1="9"  x2="14" y2="11" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+        <line x1="6"  y1="18" x2="9"  y2="19" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+        <!-- Montaña central (pico alto) -->
+        <path d="M22 10 L15 26 L29 26 Z" fill="#7a9968" opacity=".9"/>
+        <!-- Nieve pico central -->
+        <path d="M22 10 L20 14 L22 13 L24 14 Z" fill="#f0ebe1" opacity=".7"/>
+        <!-- Montaña izquierda -->
+        <path d="M14 28 L9 28 L14 18 L19 28 Z" fill="#2d5c42" opacity=".8"/>
+        <!-- Montaña derecha -->
+        <path d="M30 28 L25 28 L30 19 L35 28 Z" fill="#2d5c42" opacity=".8"/>
+        <!-- Cinta banner -->
+        <rect x="4" y="28" width="36" height="10" rx="1" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+        <!-- Punta izquierda cinta -->
+        <polygon points="4,28 0,33 4,38" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+        <!-- Punta derecha cinta -->
+        <polygon points="40,28 44,33 40,38" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+      </svg>
+      <span class="logo-text">Route<span>Claim</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#como">Cómo funciona</a>
+      <a href="#modos">Modos</a>
+      <a href="#categorias">Rutas</a>
+      <a href="#tech">App</a>
+    </div>
+    <a href="#registro" class="nav-cta">Empezar</a>
+    <button class="hamburger" id="burger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#como"       class="mob-link">Cómo funciona</a>
+  <a href="#modos"      class="mob-link">Modos</a>
+  <a href="#categorias" class="mob-link">Rutas</a>
+  <a href="#tech"       class="mob-link">App</a>
+  <a href="#registro"   class="mob-link" style="color:var(--olive)">Empezar</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <!-- Montañas decorativas SVG fondo -->
+  <svg class="hero-mountains" viewBox="0 0 1440 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 300 L200 120 L340 200 L500 80 L680 180 L820 60 L960 160 L1100 90 L1280 170 L1440 100 L1440 300 Z" fill="#2d5c42"/>
+    <path d="M0 300 L180 180 L300 240 L480 140 L620 220 L780 130 L920 200 L1060 150 L1200 220 L1440 160 L1440 300 Z" fill="#1a3d2e"/>
+  </svg>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Comunitat Valenciana · GPS en tiempo real</div>
+      <h1 class="hero-title">
+        Conquista<br>
+        <span class="accent">la montaña,</span><br>
+        <span class="sub-word">el camino</span>
+      </h1>
+      <p class="hero-sub">
+        RouteClaim convierte cada ruta de la Comunitat Valenciana en un campo de batalla. Activa el GPS, completa el recorrido y pinta el mapa de tu color. Defiende. Conquista. Domina.
+      </p>
+      <div class="hero-actions">
+        <a href="#registro" class="btn-primary">Crear cuenta gratis</a>
+        <a href="#como"     class="btn-ghost">Ver cómo funciona</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Rutas Valencia</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Modos de juego</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">GPS</div>
+          <div class="stat-label">Tiempo real</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="tag">Mecánica</span>
+      <h2 class="section-title">Simple, adictivo y real</h2>
+      <p class="section-sub">Cuatro pasos para convertir cualquier ruta valenciana en tu territorio personal.</p>
+    </div>
+    <div class="steps-grid fade-in">
+      <div class="step-card">
+        <span class="step-num">01</span>
+        <div class="step-icon">🎯</div>
+        <h3 class="step-title">Elige modo y rival</h3>
+        <p class="step-desc">Selecciona Versus para retar a alguien, Solitario para explorar a tu ritmo o Conquista para dominar una zona entera en tiempo limitado.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">02</span>
+        <div class="step-icon">📍</div>
+        <h3 class="step-title">Activa el GPS</h3>
+        <p class="step-desc">Pulsa el botón GPS en la app. El sistema te localiza en tiempo real sobre el mapa de la Comunitat Valenciana y registra cada metro.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">03</span>
+        <div class="step-icon">🗺️</div>
+        <h3 class="step-title">Completa la ruta</h3>
+        <p class="step-desc">Recorre el trayecto. Al acercarte a una ruta el sistema la valida automáticamente. Si nadie la tiene — o superas su tiempo — es tuya.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">04</span>
+        <div class="step-icon">👑</div>
+        <h3 class="step-title">El mapa cambia de color</h3>
+        <p class="step-desc">La ruta se pinta de tu color en el mapa interactivo. Acumula puntos, sube en el ranking y defiende tu territorio frente a los rivales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODOS -->
+<section id="modos" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="tag">Modos de juego</span>
+      <h2 class="section-title">Tu forma de competir</h2>
+      <p class="section-sub">Tres maneras de salir al monte, la carretera o el sendero con un objetivo real.</p>
+    </div>
+    <div class="modes-grid fade-in">
+      <div class="mode-card versus">
+        <span class="mode-badge">Competitivo</span>
+        <h3 class="mode-title">⚔️ Versus</h3>
+        <p class="mode-desc">Reta a un usuario o deja que el sistema te empareje. Cada uno tiene su color, su bandera y su historial de batallas.</p>
+        <ul class="mode-list">
+          <li>Emparejamiento por nivel y zona</li>
+          <li>Colores y banderas personalizadas</li>
+          <li>Historial completo de enfrentamientos</li>
+          <li>Alerta cuando te arrebatan una ruta</li>
+        </ul>
+      </div>
+      <div class="mode-card solo">
+        <span class="mode-badge">Exploración</span>
+        <h3 class="mode-title">🧭 Solitario</h3>
+        <p class="mode-desc">Compite contigo mismo. Objetivo: conquistar todas las rutas de tu zona y batir tus propios récords.</p>
+        <ul class="mode-list">
+          <li>Progreso personal sin presión</li>
+          <li>Récords por ruta y disciplina</li>
+          <li>Mapa de cobertura personal</li>
+          <li>Sin tiempo límite, a tu ritmo</li>
+        </ul>
+      </div>
+      <div class="mode-card conquest">
+        <span class="mode-badge">Estrategia</span>
+        <h3 class="mode-title">🏆 Conquista</h3>
+        <p class="mode-desc">Domina el mayor número de rutas en un tiempo determinado. El primero en alcanzar el objetivo gana.</p>
+        <ul class="mode-list">
+          <li>Duración configurable (días / semanas)</li>
+          <li>Ranking de zona en tiempo real</li>
+          <li>Bonificaciones por racha activa</li>
+          <li>Modo por tiempo o número de rutas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section id="categorias" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="tag">Disciplinas · Comunitat Valenciana</span>
+      <h2 class="section-title">12 rutas reales te esperan</h2>
+      <p class="section-sub">Desde la Vía Verde del Serpis hasta el Penyagolosa. Tres disciplinas, un solo mapa.</p>
+    </div>
+    <div class="cats-grid fade-in">
+      <div class="cat-card">
+        <div class="cat-icon">🏃</div>
+        <h3 class="cat-name">Running</h3>
+        <p class="cat-desc">Malvarrosa, Ribera del Xúquer, Parque del Turia. Rutas planas y de montaña para todos los niveles.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">🚴</div>
+        <h3 class="cat-name">Bicicleta</h3>
+        <p class="cat-desc">Vía Verde del Serpis, Ojos Negros, Coll de Rates. Desde la costa hasta el interior con opciones BTT y carretera.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">🥾</div>
+        <h3 class="cat-name">Trekking</h3>
+        <p class="cat-desc">Puentes de Chulilla, Forat de Bernia, Penyagolosa. La Comunitat tiene más de mil kilómetros de sendero señalizado.</p>
+      </div>
+    </div>
+    <!-- Mapa preview SVG -->
+    <div style="margin-top:3rem">
+      <div class="section-header fade-in" style="margin-bottom:1.5rem">
+        <span class="tag">Mapa en vivo</span>
+        <h2 class="section-title" style="font-size:1.8rem">Así se ve el territorio</h2>
+      </div>
+      <div class="map-container fade-in">
+        <svg class="map-svg" viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="720" height="320" fill="#0d1a14"/>
+          <defs>
+            <pattern id="g2" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0L0 0 0 40" fill="none" stroke="rgba(122,153,104,0.06)" stroke-width="1"/>
+            </pattern>
+            <filter id="glow-olive"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="glow-teal"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="720" height="320" fill="url(#g2)"/>
+          <!-- Carreteras base -->
+          <line x1="0" y1="80"  x2="720" y2="80"  stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <line x1="0" y1="170" x2="720" y2="170" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <line x1="0" y1="255" x2="720" y2="255" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <line x1="110" y1="0" x2="110" y2="320" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <line x1="250" y1="0" x2="250" y2="320" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <line x1="410" y1="0" x2="410" y2="320" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <line x1="560" y1="0" x2="560" y2="320" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <!-- Rutas conquistadas - oliva (usuario) -->
+          <polyline points="55,80 110,80 110,170 250,170"    stroke="#7a9968" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9" filter="url(#glow-olive)"/>
+          <polyline points="250,170 410,170 410,80 560,80"   stroke="#7a9968" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".65" filter="url(#glow-olive)"/>
+          <!-- Rutas rival - teal -->
+          <polyline points="410,255 560,255 560,170 720,170" stroke="#2e6b7e" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".85" filter="url(#glow-teal)"/>
+          <polyline points="110,255 250,255 250,320"         stroke="#2e6b7e" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".55" filter="url(#glow-teal)"/>
+          <!-- Ruta sin conquistar - gris discontinuo -->
+          <polyline points="250,80 250,0" stroke="#3d5040" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="10 6" opacity=".8"/>
+          <!-- Punto jugador -->
+          <circle cx="560" cy="80" r="7" fill="#7a9968" opacity=".95">
+            <animate attributeName="r" values="7;10;7" dur="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".95;.5;.95" dur="1.6s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Punto rival -->
+          <circle cx="560" cy="255" r="7" fill="#2e6b7e" opacity=".85">
+            <animate attributeName="r" values="7;10;7" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".85;.4;.85" dur="2.2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Labels -->
+          <rect x="8"   y="8"   width="128" height="26" rx="2" fill="rgba(122,153,104,.1)" stroke="rgba(122,153,104,.25)" stroke-width="1"/>
+          <text x="72"  y="25"  text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700" fill="#7a9968" letter-spacing="1">TU TERRITORIO ×8</text>
+          <rect x="490" y="8"   width="128" height="26" rx="2" fill="rgba(46,107,126,.1)"  stroke="rgba(46,107,126,.25)"  stroke-width="1"/>
+          <text x="554" y="25"  text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700" fill="#7aa8bc" letter-spacing="1">RIVAL ×5</text>
+          <rect x="265" y="293" width="148" height="22" rx="2" fill="rgba(90,100,80,.15)"  stroke="rgba(122,153,104,.15)" stroke-width="1"/>
+          <text x="339" y="309" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="700" fill="#8a9a96" letter-spacing="1">SIN CONQUISTAR</text>
+        </svg>
+      </div>
+      <div class="map-legend fade-in">
+        <div class="legend-item"><div class="legend-dot" style="background:#7a9968;box-shadow:0 0 5px #7a9968"></div>Tus rutas</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#2e6b7e;box-shadow:0 0 5px #2e6b7e"></div>Rutas del rival</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#3d5040"></div>Sin conquistar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH / APP -->
+<section id="tech" class="section">
+  <div class="container">
+    <div class="tech-wrap">
+      <div class="tech-text fade-in">
+        <div class="section-header">
+          <span class="tag">Tecnología</span>
+          <h2 class="section-title">GPS real.<br>Mapa en vivo.<br>Sin trampa.</h2>
+          <p class="section-sub">La app usa la geolocalización real de tu dispositivo para validar cada recorrido. Cuando completas una ruta, el mapa cambia de color al instante.</p>
+        </div>
+        <div class="tech-features">
+          <div class="tech-feat">
+            <div class="tech-feat-icon">📍</div>
+            <div>
+              <h4 class="tech-feat-title">Geolocalización real</h4>
+              <p class="tech-feat-desc">GPS del dispositivo con alta precisión. Detecta automáticamente cuando pasas por una ruta y la valida.</p>
+            </div>
+          </div>
+          <div class="tech-feat">
+            <div class="tech-feat-icon">⚡</div>
+            <div>
+              <h4 class="tech-feat-title">Actualización instantánea</h4>
+              <p class="tech-feat-desc">Al conquistar una ruta el mapa cambia de color en tiempo real. Tu territorio crece visible.</p>
+            </div>
+          </div>
+          <div class="tech-feat">
+            <div class="tech-feat-icon">🔔</div>
+            <div>
+              <h4 class="tech-feat-title">Alertas de territorio</h4>
+              <p class="tech-feat-desc">Notificación inmediata cuando un rival te arrebata una ruta. Tienes que salir a recuperarla.</p>
+            </div>
+          </div>
+          <div class="tech-feat">
+            <div class="tech-feat-icon">📱</div>
+            <div>
+              <h4 class="tech-feat-title">App web progresiva</h4>
+              <p class="tech-feat-desc">Funciona en cualquier navegador móvil. Sin instalación. Accede desde el enlace y ya estás jugando.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Phone mock -->
+      <div class="tech-visual fade-in">
+        <div class="phone-mock">
+          <div class="phone-screen">
+            <div class="phone-topbar">
+              <span class="phone-topbar-title">RouteClaim</span>
+              <span style="font-size:.52rem;color:var(--olive);font-family:'Barlow Condensed',sans-serif;font-weight:700">● EN VIVO</span>
+            </div>
+            <div class="phone-map-area">
+              <div class="phone-map-grid"></div>
+              <div class="phone-route route-a"></div>
+              <div class="phone-route route-b"></div>
+              <div class="phone-route route-c"></div>
+              <div class="dot-player"></div>
+            </div>
+            <div class="phone-bottom">
+              <div class="phone-score-bar">
+                <span class="phone-score you">TÚ: 8 rutas</span>
+                <span class="phone-score rival">RIVAL: 5 rutas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRO / FORMULARIO -->
+<section id="registro" class="section" style="background:var(--bg2);border-top:1px solid var(--border);padding:5rem 0">
+  <div class="container">
+    <div class="registro-wrap">
+      <!-- Info -->
+      <div class="registro-info fade-in">
+        <!-- Logo grande -->
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem">
+          <svg width="64" height="64" viewBox="0 0 44 44" fill="none">
+            <path d="M5 28 A18 18 0 0 1 39 28" fill="none" stroke="#7a9968" stroke-width="1.2"/>
+            <line x1="22" y1="6"  x2="22" y2="9"  stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+            <line x1="32" y1="9"  x2="30" y2="11" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+            <line x1="38" y1="18" x2="35" y2="19" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+            <line x1="12" y1="9"  x2="14" y2="11" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+            <line x1="6"  y1="18" x2="9"  y2="19" stroke="#7a9968" stroke-width="1" stroke-linecap="round"/>
+            <path d="M22 10 L15 26 L29 26 Z" fill="#7a9968" opacity=".9"/>
+            <path d="M22 10 L20 14 L22 13 L24 14 Z" fill="#f0ebe1" opacity=".7"/>
+            <path d="M14 28 L9 28 L14 18 L19 28 Z" fill="#2d5c42" opacity=".8"/>
+            <path d="M30 28 L25 28 L30 19 L35 28 Z" fill="#2d5c42" opacity=".8"/>
+            <rect x="4" y="28" width="36" height="10" rx="1" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+            <polygon points="4,28 0,33 4,38" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+            <polygon points="40,28 44,33 40,38" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+          </svg>
+          <div>
+            <div style="font-family:var(--fd);font-size:1.6rem;letter-spacing:.02em">Route<span style="color:var(--olive);font-style:italic">Claim</span></div>
+            <div style="font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);font-style:italic">Reclama tu ruta</div>
+          </div>
+        </div>
+        <h2>Únete a la batalla<br>por la <span style="color:var(--olive);font-style:italic">Comunitat</span></h2>
+        <p>RouteClaim es una app deportiva que convierte las rutas físicas en un campo de batalla territorial. Crea tu cuenta, elige tu color y tu bandera, y empieza a conquistar.</p>
+        <ul class="registro-features">
+          <li>12 rutas reales de la Comunitat Valenciana</li>
+          <li>GPS en tiempo real con mapa interactivo</li>
+          <li>Running, bicicleta y trekking en el mismo mapa</li>
+          <li>Conquista rutas y defiéndelas de los rivales</li>
+          <li>Ranking local por zona y ciudad</li>
+          <li>Gratis para siempre, sin publicidad</li>
+        </ul>
+        <div style="margin-top:1.75rem;padding:.9rem 1.1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--rad)">
+          <div style="font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);margin-bottom:.4rem">Cuenta demo</div>
+          <div style="font-family:var(--fu);font-size:.82rem;font-weight:600;color:var(--text3)">Email: <span style="color:var(--text2)">demo@test.com</span> · Contraseña: <span style="color:var(--text2)">demo123</span></div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="auth-box fade-in" id="auth-box-main">
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchAuthTab('login')">Entrar</button>
+          <button class="auth-tab" onclick="switchAuthTab('registro')">Registro</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="form-login" class="auth-form active">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" id="login-email" placeholder="tu@email.com" autocomplete="email"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contraseña</label>
+            <input class="form-input" type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+          </div>
+          <div class="auth-error" id="login-error">Email o contraseña incorrectos.</div>
+          <button class="btn-submit" onclick="doLogin()">Entrar a RouteClaim</button>
+          <div class="or-divider">O</div>
+          <div style="text-align:center;font-size:.78rem;color:var(--text3);font-family:var(--fu)">
+            ¿Sin cuenta? <span style="color:var(--olive);cursor:pointer" onclick="switchAuthTab('registro')">Regístrate gratis →</span>
+          </div>
+        </div>
+
+        <!-- REGISTRO -->
+        <div id="form-registro" class="auth-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Usuario</label>
+              <input class="form-input" type="text" id="reg-username" placeholder="MontañeroCV" maxlength="20" autocomplete="username"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input class="form-input" type="email" id="reg-email" placeholder="tu@email.com" autocomplete="email"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Contraseña</label>
+              <input class="form-input" type="password" id="reg-pass" placeholder="mín. 6 caracteres" autocomplete="new-password"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Disciplina</label>
+              <select class="form-input" id="reg-disc">
+                <option value="running">🏃 Running</option>
+                <option value="bicicleta">🚴 Bicicleta</option>
+                <option value="trekking">🥾 Trekking</option>
+                <option value="todas">⚡ Todas</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tu color en el mapa</label>
+            <div class="color-picker-grid" id="color-picker"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tu bandera</label>
+            <div class="flag-grid" id="flag-picker"></div>
+          </div>
+          <div class="auth-error" id="reg-error"></div>
+          <button class="btn-submit" onclick="doRegistro()">⛰️ Crear cuenta y conquistar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Route<span>Claim</span></div>
+        <div class="footer-tagline">Reclama tu ruta. Defiende tu zona.</div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Producto</div>
+          <a href="#como">Cómo funciona</a>
+          <a href="#modos">Modos de juego</a>
+          <a href="#categorias">Rutas Valencia</a>
+          <a href="#tech">App & GPS</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Comunidad</div>
+          <a href="#">Instagram</a>
+          <a href="#">Strava</a>
+          <a href="#">Discord</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Legal</div>
+          <a href="#">Privacidad</a>
+          <a href="#">Términos</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 RouteClaim. Todos los derechos reservados.</span>
+      <span>Proyecto Fin de Ciclo · DAW · Juan David Zuluaga Granados</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /landing -->
+
+<!-- ══════════════════════
+     APP WRAPPER (post-login)
+══════════════════════ -->
+<div id="app-wrapper" style="display:none">
+
+  <!-- Top nav app -->
+  <div class="app-nav">
+    <div class="nav-logo">
+      <svg class="nav-logo-svg" viewBox="0 0 44 44" fill="none">
+        <path d="M5 28 A18 18 0 0 1 39 28" fill="none" stroke="#7a9968" stroke-width="1.2"/>
+        <path d="M22 10 L15 26 L29 26 Z" fill="#7a9968" opacity=".9"/>
+        <path d="M14 28 L9 28 L14 18 L19 28 Z" fill="#2d5c42" opacity=".8"/>
+        <path d="M30 28 L25 28 L30 19 L35 28 Z" fill="#2d5c42" opacity=".8"/>
+        <rect x="4" y="28" width="36" height="10" rx="1" fill="#1a3d2e" stroke="#7a9968" stroke-width=".8"/>
+        <polygon points="4,28 0,33 4,38" fill="#1a3d2e"/>
+        <polygon points="40,28 44,33 40,38" fill="#1a3d2e"/>
+      </svg>
+      Route<span>Claim</span>
+    </div>
+    <div class="nav-user" onclick="goTab('perfil')">
+      <div class="nav-avatar" id="nav-avatar-el"></div>
+      <span class="nav-username" id="nav-username-el"></span>
+    </div>
+  </div>
+
+  <!-- Screens -->
+  <div style="flex:1;overflow:hidden;position:relative">
+
+    <!-- MAPA -->
+    <div id="screen-mapa" class="screen active" style="position:absolute;inset:0">
+      <div id="map" style="flex:1;height:100%"></div>
+      <div class="map-hud">
+        <div class="hud-top">
+          <div class="hud-panel">
+            <div class="hud-score-label">Tus rutas</div>
+            <div class="hud-score-num" id="hud-rutas">0</div>
+          </div>
+          <div class="hud-panel">
+            <div class="legend-row"><div class="legend-dot" id="legend-own-dot"></div><span>Tuyas</span></div>
+            <div class="legend-row"><div class="legend-dot" style="background:#2e6b7e"></div><span>Rival</span></div>
+            <div class="legend-row"><div class="legend-dot" style="background:#3d5040"></div><span>Libre</span></div>
+          </div>
+        </div>
+        <button class="btn-gps" id="btn-gps" onclick="toggleGPS()">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+          <span id="gps-label">Activar GPS</span>
+        </button>
+        <div class="conquest-popup" id="conquest-popup">
+          <div class="conquest-emoji">🏔️</div>
+          <div class="conquest-title" id="cp-title">¡Conquistada!</div>
+          <div class="conquest-sub" id="cp-sub">Has conquistado una nueva ruta.</div>
+          <button class="btn-close-popup" onclick="closeConquestPopup()">Ver en mapa</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUTAS -->
+    <div id="screen-rutas" class="screen" style="position:absolute;inset:0">
+      <div class="screen-header">
+        <h2>Rutas Valencia</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterRutas('todas',this)">Todas</button>
+          <button class="filter-btn" onclick="filterRutas('running',this)">🏃 Running</button>
+          <button class="filter-btn" onclick="filterRutas('bicicleta',this)">🚴 Bici</button>
+          <button class="filter-btn" onclick="filterRutas('trekking',this)">🥾 Trek</button>
+          <button class="filter-btn" onclick="filterRutas('libre',this)">🟢 Libres</button>
+        </div>
+      </div>
+      <div class="scroll-content" id="rutas-list"></div>
+    </div>
+
+    <!-- RANKING -->
+    <div id="screen-ranking" class="screen" style="position:absolute;inset:0">
+      <div class="screen-header"><h2>Ranking Valencia</h2></div>
+      <div class="scroll-content" id="ranking-list"></div>
+    </div>
+
+    <!-- PERFIL -->
+    <div id="screen-perfil" class="screen" style="position:absolute;inset:0;overflow-y:auto">
+      <div class="perfil-header">
+        <div class="perfil-avatar" id="p-avatar"></div>
+        <div>
+          <div style="font-size:1.5rem" id="p-flag"></div>
+          <div class="perfil-name" id="p-name"></div>
+          <div style="font-family:var(--fu);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)" id="p-disc"></div>
+        </div>
+      </div>
+      <div class="perfil-stats" id="p-stats"></div>
+      <div class="perfil-section">
+        <div class="perfil-section-title">Mis rutas conquistadas</div>
+        <div id="p-rutas-list" style="display:flex;flex-direction:column;gap:.35rem"></div>
+      </div>
+      <div class="perfil-section">
+        <div class="perfil-section-title">Historial de actividades</div>
+        <div id="p-actividades-list"></div>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">← Volver al inicio / Cerrar sesión</button>
+    </div>
+
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tab-mapa" onclick="goTab('mapa')">
+      <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Mapa
+    </button>
+    <button class="tab-btn" id="tab-rutas" onclick="goTab('rutas')">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rutas
+    </button>
+    <button class="tab-btn" id="tab-ranking" onclick="goTab('ranking')">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Ranking
+    </button>
+    <button class="tab-btn" id="tab-perfil" onclick="goTab('perfil')">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Perfil
+    </button>
+  </div>
+</div>
+
+<!-- MODAL RUTA -->
+<div class="modal-overlay" id="modal-ruta" onclick="closeModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="m-nombre"></div>
+    <div class="modal-meta" id="m-meta"></div>
+    <div class="mini-map" id="m-map"></div>
+    <div class="modal-desc" id="m-desc"></div>
+    <div id="m-btn-wrap" style="margin-bottom:.75rem"></div>
+    <button class="btn-ir-mapa" onclick="irAlMapa()">⛰️ Ver en mapa principal</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="app.css"/>
+<script src="main.js"></script>
+</body>
+</html>
